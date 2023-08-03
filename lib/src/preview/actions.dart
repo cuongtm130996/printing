@@ -52,6 +52,11 @@ class PdfPreviewAction extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.onPressed,
+    this.isCustomLayout,
+    this.width,
+    this.height,
+    this.buttonName,
+    this.decoration
   }) : super(key: key);
 
   /// The icon to display
@@ -59,12 +64,24 @@ class PdfPreviewAction extends StatelessWidget {
 
   /// The callback called when the user tap on the icon
   final OnPdfPreviewActionPressed? onPressed;
+  final bool? isCustomLayout;
+  final double? width;
+  final double? height;
+  final String? buttonName;
+  final BoxDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return !(isCustomLayout ?? false) ? IconButton(
       icon: icon,
       onPressed: onPressed == null ? null : () => pressed(context),
+    ) : GestureDetector(
+      child: Container(
+        width: width,
+        height: height,
+        decoration: decoration,
+      ),
+      onTap: onPressed == null ? null : () => pressed(context),
     );
   }
 
@@ -83,6 +100,11 @@ class PdfPrintAction extends StatelessWidget {
     this.onPrintError,
     this.dynamicLayout = true,
     this.usePrinterSettings = false,
+    this.isCustomLayout,
+    this.width,
+    this.height,
+    this.buttonName,
+    this.decoration
   })  : icon = icon ?? const Icon(Icons.print),
         jobName = jobName ?? 'Document',
         super(key: key);
@@ -106,12 +128,22 @@ class PdfPrintAction extends StatelessWidget {
 
   /// Called if an error creating the Pdf occurred
   final void Function(dynamic error)? onPrintError;
+  final bool? isCustomLayout;
+  final double? width;
+  final double? height;
+  final String? buttonName;
+  final BoxDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
     return PdfPreviewAction(
       icon: icon,
       onPressed: _print,
+      isCustomLayout: isCustomLayout,
+      height: height,
+      width: width,
+      decoration: decoration,
+      buttonName: buttonName,
     );
   }
 

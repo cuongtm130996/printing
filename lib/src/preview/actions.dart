@@ -76,12 +76,15 @@ class PdfPreviewAction extends StatelessWidget {
       icon: icon,
       onPressed: onPressed == null ? null : () => pressed(context),
     ) : GestureDetector(
-      child: Container(
-        width: width,
-        height: height,
-        alignment: Alignment.center,
-        child: Text(buttonName ?? '', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
-        decoration: decoration,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: Container(
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          child: Text(buttonName ?? '', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
+          decoration: decoration,
+        )
       ),
       onTap: onPressed == null ? null : () => pressed(context),
     );

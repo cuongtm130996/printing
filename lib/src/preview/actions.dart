@@ -79,6 +79,8 @@ class PdfPreviewAction extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
+        alignment: Alignment.center,
+        child: Text(buttonName ?? '', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
         decoration: decoration,
       ),
       onTap: onPressed == null ? null : () => pressed(context),
